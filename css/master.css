@@ -1,0 +1,28 @@
+body{
+    margin:0
+}
+a{
+    text-decoration: none;
+}
+/* navigation */
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+nav *{
+    align-self: center;
+    padding: 10px;
+}
+nav{
+    display: flex;
+}
+/* footer */
+footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+    display: flex;
+    text-shadow: 1px 1px white;
+    justify-content: space-around;
+}

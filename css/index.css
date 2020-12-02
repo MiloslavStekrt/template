@@ -1,0 +1,31 @@
+/* main */
+.uvod{
+    height: 20vh;
+    text-align: center;
+    padding: 200px 80px;
+}
+.uvod p{
+    color: gray;
+}
+.qasection{
+    border-radius: 20px;
+    padding: 10px 40px;
+    margin: 10px 50px;
+    text-align: center;
+    background-color: whitesmoke;
+    display: flex;
+    box-shadow: 1px 1px 5px 5px whitesmoke;
+    justify-content: space-between;
+}
+.popularCompanies{
+    border-radius: 20px;
+    padding: 20px 20px;
+    margin: 40px;
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 5px 5px whitesmoke;
+    display: flex;
+    text-align: center;
+}
+.popularCompanies *{
+    flex: 1 1 auto
+}

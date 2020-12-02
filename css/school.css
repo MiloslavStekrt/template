@@ -1,0 +1,71 @@
+/* details */
+.details{
+  text-align: center;
+  width: 60vw;
+  background-color: whitesmoke;
+  padding: 10px;
+  margin: 50px auto;
+  border-radius: 20px;
+  font-size: 200%;
+}
+.details span{
+  display: flex;
+  justify-content: space-around;
+  font-size: 75%;
+}
+.details span *{
+  padding: 10px
+}
+.allClasses{
+  cursor: pointer;
+  border-radius: 10px
+}
+.allClasses:hover{
+  background-color: white
+}
+/* schedule */
+.schedule{
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px 10px #89f;
+  width: 70%;
+  background-color: #67f;
+  padding: 10px 20px;
+  margin: 50px auto;
+}
+.schedule h2{
+  padding-left: 5%;
+  color: whitesmoke
+}
+.lessons{
+  display: flex;
+  color: white;
+}
+.lessons p{
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid blue;
+  font-size: 150%;
+  padding: 25px 0px;
+  flex: 1 1 auto;
+}
+.lessons p:hover{
+  background-color: blue;
+}
+/* activities */
+.activities{
+  display: flex;
+  font-size: 150%;
+  padding: 50px;
+}
+.exams, .homeworks{
+  flex: 1 1 auto;
+  padding: 0 5%;
+  margin: auto;
+}
+.exams h1, .homeworks h1{
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+.exams p, .homeworks p{
+  border-bottom: .5px solid gray;
+}

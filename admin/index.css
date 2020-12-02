@@ -1,0 +1,36 @@
+main{
+  background-color: #5a5;
+  margin: 100px auto;
+  padding: 5%;
+  border-radius: 20px;
+  width: 20%;
+  text-align: center;
+  height: 10%;
+}
+body{
+  background-color: #00a;
+}
+form{
+  flex-direction: column;
+}
+input{
+  background-color: #44f;
+  padding: 5% 10% ;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  border: none;
+  margin: 10px;
+  box-shadow: 1px 1px 5px 5px #44f
+}
+button{
+  border-radius: 20px;
+  background-color: blue;
+  padding: 20px;
+  border: none;
+  margin: 20px 0;
+  color: white;
+  cursor: pointer;
+  box-shadow: 1px 1px 2px 2px blue;
+}
