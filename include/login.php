@@ -31,3 +31,4 @@ else {
   header("location: ../login.php");
   die();
 }
+$conn = null;

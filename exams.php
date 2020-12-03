@@ -1,5 +1,5 @@
 <?php
-if(!$_SESSION['teacher']){
+if(!$_SESSION['role']=2){
   header('location: school.php');
   die();
 }

@@ -1,5 +1,5 @@
 <?php
-if($_SESSION['student']){
+if($_SESSION['role']=1){
   header('location: exams.php');
   die();
 }
