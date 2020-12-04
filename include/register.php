@@ -1,7 +1,8 @@
 <?php
 session_start();
 if(!isset($_POST['button'])){
-  include_once 'defend.php';
+  header("location: /admin/");
+  die();
 }
 
 $name = $_POST['nameOf'];
@@ -10,35 +11,8 @@ $pwdr = $_POST['pwd-r'];
 $role = $_POST['role'];
 $email = $_POST['email'];
 
-// $backto = "";
-// $goback = false;
-
-if(empty($name) || empty($pwd) || empty($pwdr) || empty($role) || empty($email)){
-  $backto = "nameOf=".$name."&email=".$email."&r=empty";
-}
-
-if($role == "teacher"){
-  $role = 2;
-}elseif($role == "student"){
-  $role = 1;
-}else{
-  $backto = "nameOf=".$name."&email=".$email."&r=rolecorrect";
-}
-
-if($pwdr != $pwd ){
-  $backto = "nameOf=".$name."&email=".$email."&r=pwdsame";
-}
-
-if(isset($backto)){
-  header("location: ../register.php?".$backto);
-  die();
-}
-
-include 'db-connect.php';
-
-$pwd = password_hash($pwd, PASSWORD_DEFAULT);
-$conn->prepare("INSERT INTO `users`(`name`, `pwd`, `email`, `role`) VALUES (? ,? ,? ,?  )")->execute([$name, $pwd, $email, $role]);
-$conn=null;
+include_once 'newuser.php';
+register($name, $pwd, $pwdr, $role, $email, "register.php");
 
 $_SESSION['name'] = $name;
 $_SESSION['email'] = $email;

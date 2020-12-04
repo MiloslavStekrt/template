@@ -3,7 +3,7 @@
       <section class="edit">
         <article class="users">
           <h1>User</h1>
-          <form class="edituser" action="" method="POST">
+          <form class="edituser" action="/include/user_register.php" method="POST">
             <input type="text" name="name" placeholder="User name">
             <input type="text" name="pwd" placeholder="Password">
             <span class="origin">
