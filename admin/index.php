@@ -1,14 +1,4 @@
- <?php $stylefile="/admin/index.css"; include_once '../clear/header.php'; ?>
-<!-- listing all classes in DB and users -->
-<!-- <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../admin/index.css">
-    <title>BMS - admin</title>
-  </head>
-  <body> -->
-
+ <?php $title="BMS - users"; $stylefile="/admin/index.css"; include_once '../clear/header.php'; ?>
     <main>
       <section class="edit">
         <article class="users">

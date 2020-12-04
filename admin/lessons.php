@@ -1,18 +1,16 @@
 <?php $title="BMS - admin"; $stylefile="/admin/index.css"; include_once '../clear/header.php'; ?>
 <!-- listing all classes in DB and users -->
+  <!-- must ask for every teacher in table users -->
    <main>
      <section class="edit">
        <article class="users">
          <h1>User</h1>
          <form class="edituser" action="" method="POST">
-           <input type="text" name="name" placeholder="User name">
-           <input type="text" name="pwd" placeholder="Password">
+           <input type="text" name="name" placeholder="Subject name">
+           <input type="text" name="time" placeholder="What time? PO-1,2 . UT-2,3 . ST-8">
            <span class="origin">
-             <input type="text" name="email" placeholder="Email">
-             <select class="" name="role">
-               <option value="student">Student</option>
-               <option value="teacher">Teacher</option>
-               <option value="principal">Principal</option>
+             <select class="" name="teachername">
+               <option value="id">teachername</option>
              </select>
            </span>
            <button type="submit" name="button">Submit</button>
@@ -26,18 +24,18 @@
      </section>
      <section class="show">
        <article class="navbar">
-         <button type="button" name="button">users</button>
-         <button type="button" name="button">lessons</button>
+         <a href="/admin/">users</a>
+         <a href="/admin/lessons.php">lessons</a>
        </article>
        <article class="showest">
          <span>
            <h3>name</h3>
-           <h3>role</h3>
+           <h3>teacher</h3>
          </span>
          <div class="shower">
            <?php
            for ($i=0; $i < 10; $i++) {
-             echo '<button><p>name</p><p>teacher</p></button>';
+             echo '<button><p>subject</p><p>teacher-name</p></button>';
            }
             ?>
          </div>
