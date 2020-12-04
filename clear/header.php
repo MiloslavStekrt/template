@@ -19,7 +19,7 @@ session_start();
         <a href="/"><h1>BEAM MS</h1></a>
         <nav>
             <?php
-              if($_SESSION['role']==1){
+              if($_SESSION['role']==2){
                 echo '<a href="/school.php">My School</a>';
                 echo '<a href="/homeworks.php">Homeworks</a>';
                 echo '<a href="/exams.php">Exams</a>';
@@ -32,12 +32,12 @@ session_start();
                 echo '<a href="">Elearning</a>';
                 echo '<a href="">R</a>';
                 echo '<a href="/include/logout.php">left</a>';
-              }else if($_SESSION['role']==2){
+              }else if($_SESSION['role']==3){
                 echo '<a href="/school.php">My School</a>';
                 echo '<a href="/homeworks.php">Homeworks</a>';
                 echo '<a href="/exams.php">Exams</a>';
                 echo '<a href="">Elearning</a>';
-                echo '<a href="/amdin">admin</a>';
+                echo '<a href="/admin">admin</a>';
                 echo '<a href="/include/logout.php">left</a>';
               }else{
                 echo '<a href="/login.php">Login</a>';
