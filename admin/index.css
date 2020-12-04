@@ -1,36 +1,114 @@
-main{
-  background-color: #5a5;
-  margin: 100px auto;
-  padding: 5%;
-  border-radius: 20px;
-  width: 20%;
-  text-align: center;
-  height: 10%;
-}
+/* main show */
 body{
-  background-color: #00a;
+  max-height: 100%;
 }
-form{
+main{
+  margin: 0;
+  width: 98vw;
+  height: 82vh;
+  display: flex;
+  padding: 1vh 1vw;
+}
+section{
+  padding: 10px 20px;
+  box-shadow: inset 0px 0px 2px 2px white;
+}
+.show{
+  flex: 1 1 auto;
+  background-color: #99f;
+  border-radius: 0 20px 20px 0;
+}
+.edit{
+  flex: .4 1 auto;
+  background-color: #9f9;
+  border-radius: 20px 0 0 20px;
+}
+.shower{
+  overflow-y: scroll;
+  height: 60vh;
+}
+.edituser{
+  display: flex;
   flex-direction: column;
 }
-input{
-  background-color: #44f;
-  padding: 5% 10% ;
-  border-radius: 10px;
-  text-align: center;
-  font-weight: bold;
-  color: white;
-  border: none;
-  margin: 10px;
-  box-shadow: 1px 1px 5px 5px #44f
+/* first show */
+span{
+  display: flex;
 }
-button{
-  border-radius: 20px;
-  background-color: blue;
+span input{
+  flex: 1 1 auto;
+}
+form{
+  margin: 10px;
+}
+form button{
+  margin: 10px 0;
+  background-color: green;
+  border-radius: 10px;
+  padding: 10px;
+}
+.massage{
+  border-top: 2.5px solid #cacaca;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+h1{
+  color: #666;
+  text-align: center;
+  text-shadow: 0px 0px 2px #fff;
+}
+textarea{
   padding: 20px;
+  overflow:auto;
+  resize:none;
   border: none;
-  margin: 20px 0;
-  color: white;
-  cursor: pointer;
-  box-shadow: 1px 1px 2px 2px blue;
+  width:92%;
+  box-shadow: inset 1px 1px 5px 5px #5c5;
+  border-radius: 15px;
+  background-color: #7e7;
+  color: #020;
+  font-weight: bold;
+  margin-bottom: 10px;
+  height:100px;
+}
+/* second show */
+input, select{
+  padding: 5px 10px;
+  overflow:auto;
+  resize:none;
+  border: none;
+  box-shadow: inset 1px 1px 5px 5px #5c5;
+  border-radius: 10px;
+  background-color: #7e7;
+  color: #020;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.origin input{
+  border-radius: 10px 0 0 10px;
+}
+.origin select{
+  border-radius: 0;
+}
+.navbar{
+  display: flex;
+}
+.navbar button{
+  flex: 1 1 auto;
+  padding: 5px;
+  margin: 5px;
+}
+.shower{
+  display: flex;
+  flex-direction: column;
+}
+.showest span{
+  justify-content: space-between;
+  padding: 5px 20px;
+  border-top: 1px solid black
+}
+.shower button{
+  display: flex;
+  justify-content: space-between;
 }
