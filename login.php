@@ -1,6 +1,10 @@
 <?php
   $title = "BMS - login";
   include_once 'clear/header.php';
+  if(isset($_SESSION['name'])){
+    header("location: /");
+    die();
+  }
 ?>
 <main>
   <form class="" action="include/login.php" method="POST">

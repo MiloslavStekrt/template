@@ -1,4 +1,8 @@
 <?php
+if(isset($_SESSION['name'])){
+  header("location: /");
+  die();
+}
 $title = "BMS - Register";
 include_once 'clear/header.php';?>
     <main>
