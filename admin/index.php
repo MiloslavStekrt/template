@@ -35,8 +35,16 @@
           </span>
           <div class="shower">
             <?php
-            for ($i=0; $i < 10; $i++) {
-              echo '<button><p>name</p><p>teacher</p></button>';
+            include '../include/db-connect.php';
+            $users = $conn->query("SELECT * FROM `users` WHERE `role`=1 OR `role`=2")->fetchAll();
+
+            foreach ($users as $user) {
+              if($user['role'] == 1){
+                $role = "student";
+              }else{
+                $role = "teacher";
+              }
+              echo '<button value="'.$user["id"].'"><p>'.$user["name"].'</p><p>'.$role.'</p></button>';
             }
              ?>
           </div>
