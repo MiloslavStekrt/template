@@ -13,14 +13,13 @@ if(empty($uid) || empty($pwd)){
 }
 
 include_once 'db-connect.php';
-// $pwd = password_hash($pwd, PASSWORD_DEFAULT );
-$sql = "SELECT * FROM `users` WHERE `email`='$uid'";
 
-$res = $conn->query($sql);
+$res = $conn->query("SELECT * FROM `users` WHERE `email`='$uid'");
 $count = $res->rowCount();
 $dates = $res->fetch(PDO::FETCH_ASSOC);
 
-if(!empty($count) && password_verify($pwd, $dates['pwd'])){
+if(password_verify($pwd, $dates['pwd'])){
+  $_SESSION['id'] = $dates['id'];
   $_SESSION['name'] = $dates['name'];
   $_SESSION['role'] = $dates['role'];
   $_SESSION['auth'] = $dates['auth'];

@@ -1,6 +1,5 @@
 <?php
 $title = "BEAM Managment System";
-$stylefile = "index";
 include_once 'clear/header.php';?>
     <main>
         <section class="uvod">

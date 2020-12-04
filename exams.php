@@ -1,11 +1,12 @@
 <?php
-if(!$_SESSION['role']=2){
-  header('location: school.php');
-  die();
-}
-$teacher = true;
-$def = true;
-include_once 'clear/header.php';?>
+  // teacher defend
+  if(!$_SESSION['role']=2){
+    header('location: school.php');
+    die();
+  }
+  $title = "BMS - Exams";
+  include_once 'clear/header.php';
+?>
 <main>
   <section class="sidebar">
     <h1>Exams</h1>

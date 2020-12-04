@@ -14,7 +14,7 @@ $email = $_POST['email'];
 // $goback = false;
 
 if(empty($name) || empty($pwd) || empty($pwdr) || empty($role) || empty($email)){
-  $backto = "location: ../register.php?nameOf=".$name."&email=".$email."&r=empty";
+  $backto = "nameOf=".$name."&email=".$email."&r=empty";
 }
 
 if($role == "teacher"){
@@ -22,15 +22,15 @@ if($role == "teacher"){
 }elseif($role == "student"){
   $role = 1;
 }else{
-  $backto = "location: ../register.php?nameOf=".$name."&email=".$email."&r=rolecorrect";
+  $backto = "nameOf=".$name."&email=".$email."&r=rolecorrect";
 }
 
 if($pwdr != $pwd ){
-  $backto = "location: ../register?nameOf=".$name."&email=".$email."&r=pwdsame";
+  $backto = "nameOf=".$name."&email=".$email."&r=pwdsame";
 }
 
 if(isset($backto)){
-  header($backto);
+  header("location: ../register.php?".$backto);
   die();
 }
 

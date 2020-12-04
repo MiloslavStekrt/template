@@ -1,8 +1,14 @@
 <?php
-try {
-  $conn = new PDO("mysql:host=localhost;dbname=beam-ms", "root", "AdminLuser");
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-  header("location: /");
-  die();
+
+function generate($dbname, $nick, $pwd){
+  try{
+    $conn = new PDO("mysql:host=localhost;dbname=$dbname", $nick, $pwd);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  } catch(PDOException $e) {
+    header("location: /");
+    die();
+  }
+  return $conn;
 }
+
+$conn = generate("beam-ms","root", "AdminLuser");

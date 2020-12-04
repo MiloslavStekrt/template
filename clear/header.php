@@ -1,14 +1,6 @@
 <?php
 $stylefile = "css/".basename($_SERVER['SCRIPT_NAME'], ".php").".css";
 session_start();
-if(!isset($def)){
-  $def = false;
-}
-if($def){
-  include_once 'include/defend.php';
-}else if(!$def){
-  include_once 'include/undefend.php';
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,19 +22,26 @@ if($def){
         <!-- ring - new activity, ... etc. -->
         <nav>
             <?php
-              if($_SESSION['role']==2){
+              if($_SESSION['role']==1){
                 echo '<a href="/school.php">My School</a>';
                 echo '<a href="/homeworks.php">Homeworks</a>';
                 echo '<a href="/exams.php">Exams</a>';
                 echo '<a href="">Elearning</a>';
                 echo '<a href="">R</a>';
-                echo '<a href="include/unlogin.php">left</a>';
+                echo '<a href="include/logout.php">left</a>';
               }else if($_SESSION['role']==1){
                 echo '<a href="/school.php">My School</a>';
                 echo '<a href="/mark.php">My Marks</a>';
                 echo '<a href="">Elearning</a>';
                 echo '<a href="">R</a>';
-                echo '<a href="include/unlogin.php">left</a>';
+                echo '<a href="include/logout.php">left</a>';
+              }else if($_SESSION['role']==2){
+                echo '<a href="/school.php">My School</a>';
+                echo '<a href="/homeworks.php">Homeworks</a>';
+                echo '<a href="/exams.php">Exams</a>';
+                echo '<a href="">Elearning</a>';
+                echo '<a href="/amdin">admin</a>';
+                echo '<a href="include/logout.php">left</a>';
               }else{
                 echo '<a href="login.php">Login</a>';
                 echo '<a href="register.php">Register</a>';
