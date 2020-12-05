@@ -5,8 +5,11 @@ if(!isset($_POST['button'])){
   die();
 }
 
-function register($name, $pwd, $pwdr, $role, $email, $last){
-  if(empty($name) || empty($pwd) || empty($pwdr) || empty($role) || empty($email)){
+function register($name, $pwd, $pwdr, $role, $email, $last, $conn){
+  if(!isset($conn)){
+    include_once 'db-connect.php';
+  }
+    if(empty($name) || empty($pwd) || empty($pwdr) || empty($role) || empty($email)){
     $backto = "nameOf=".$name."&email=".$email."&r=empty";
   }
 
@@ -30,10 +33,7 @@ function register($name, $pwd, $pwdr, $role, $email, $last){
     header("location: ../".$last."?".$backto);
     die();
   }
-
-  include_once 'db-connect.php';
   $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-  $conn->prepare("INSERT INTO `users`(`name`, `pwd`, `email`, `role`) VALUES (? ,? ,? ,?  )")
-       ->execute([$name, $pwd, $email, $role]);
+  $conn->prepare("INSERT INTO `users`(`name`, `pwd`, `email`, `role`) VALUES (? ,? ,? ,?  )")->execute([$name, $pwd, $email, $role]);
   $conn = null;
 }

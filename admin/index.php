@@ -14,6 +14,9 @@
           <form class="edituser" action="/include/user_register.php" method="POST">
             <input type="text" value="<?php echo $usr['name'] ?>" name="name" placeholder="User name">
             <input type="text" name="pwd" placeholder="Password">
+            <?php if(isset($_GET['id'])){
+              echo '<input type="text" name="id" value="'.$_GET['id'].'" hidden>';
+            } ?>
             <span class="origin">
               <input type="text" value="<?php echo $usr['email'] ?>" name="email" placeholder="Email">
               <select class="" name="role">
