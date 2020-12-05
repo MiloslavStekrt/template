@@ -8,6 +8,7 @@
     $usr = $conn->query("SELECT * FROM `users` WHERE `id`=".$lesson['id'])->fetch(PDO::FETCH_ASSOC);
   }
   $users_all = $conn->query("SELECT * FROM `users` WHERE `role`=2")->fetchAll();
+  $users_student = $conn->query("SELECT * FROM `users` WHERE `role`=1")->fetchAll();
   $lessons_all = $conn->query("SELECT * FROM `classes`")->fetchAll();
   $conn = null;
 ?>
@@ -38,9 +39,16 @@
            </span>
          </form>
        </article>
-       <form class="massage" method="POST">
+       <form class="student-select" method="POST">
          <h1>Student</h1>
-         <textarea class="messagehit" name="msg" placeholder="Enter Massage"></textarea>
+         <article class="student_list">
+           <?php foreach ($users_student as $student): ?>
+             <span>
+               <input type="checkbox" id="<?php echo $student['id'] ?>" name="<?php echo $student['id'] ?>" value="<?php echo $student['id'] ?>">
+               <label for="<?php echo $student['id'] ?>"><?php echo $student['name'] ?></label>
+             </span>
+           <?php endforeach; ?>
+         </article>
          <button type="submit" name="button">Submit</button>
        </form>
      </section>
