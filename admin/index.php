@@ -1,4 +1,9 @@
- <?php $title="BMS - users"; $stylefile="/admin/index.css"; include_once '../clear/header.php'; include_once '../include/db-connect.php'; ?>
+<?php
+  $title="BMS - users";
+  $stylefile="/admin/index.css";
+  include_once '../clear/header.php';
+  include_once '../include/db-connect.php';
+?>
     <main>
       <section class="edit">
         <article class="users">
@@ -59,8 +64,7 @@
               }
               echo '<button onclick="window.location.href=`/admin/index.php?id='.$user['id'].'`;" type="submit"><p>'.$user["name"].'</p><p>'.$role.'</p></button>';
             }
-             ?>
-
+            ?>
           </div>
         </article>
       </section>
