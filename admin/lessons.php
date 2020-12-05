@@ -9,6 +9,7 @@
   }
   $users_all = $conn->query("SELECT * FROM `users` WHERE `role`=2")->fetchAll();
   $lessons_all = $conn->query("SELECT * FROM `classes`")->fetchAll();
+  $conn = null;
 ?>
    <main>
      <section class="edit">
@@ -27,13 +28,6 @@
                     echo '<option value="'.$user['id'].'">'.$user['name'].'</option>';
                   }
                 }
-                 // foreach ($users as $user) {
-                 //   if($user['id'] == $usr['id']){
-                 //     echo '<option value="'.$user['id'].'" selected>'.$user['name'].'</option>';
-                 //   }else{
-                 //     echo '<option value="'.$user['id'].'">'.$user['name'].'</option>';
-                 //   }
-                 // }
                ?>
              </select>
            </span>

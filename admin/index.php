@@ -3,10 +3,10 @@
   $stylefile="/admin/index.css";
   include_once '../clear/header.php';
   include_once '../include/db-connect.php';
-  $usr = $conn->query("SELECT * FROM `users` WHERE `id`=".$_GET['id'])->fetch(PDO::FETCH_ASSOC);
   $users = $conn->query("SELECT * FROM `users` WHERE `role`=1 OR `role`=2")->fetchAll();
 
   if(isset($_GET['id'])){
+    $usr = $conn->query("SELECT * FROM `users` WHERE `id`=".$_GET['id'])->fetch(PDO::FETCH_ASSOC);
     if($usr['role'] == 1){
       $role = "student";
     }else{
