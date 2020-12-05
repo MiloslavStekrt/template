@@ -3,22 +3,25 @@
   $stylefile="/admin/index.css";
   include_once '../clear/header.php';
   include_once '../include/db-connect.php';
+  $usr = $conn->query("SELECT * FROM `users` WHERE `id`=".$_GET['id'])->fetch(PDO::FETCH_ASSOC);
+  $users = $conn->query("SELECT * FROM `users` WHERE `role`=1 OR `role`=2")->fetchAll();
+
+  if(isset($_GET['id'])){
+    if($usr['role'] == 1){
+      $role = "student";
+    }else{
+      $role = "teacher";
+    }
+  }
+
 ?>
     <main>
       <section class="edit">
         <article class="users">
           <h1>User</h1>
-          <?php if(isset($_GET['id'])){
-            $usr = $conn->query("SELECT * FROM `users` WHERE `id`=".$_GET['id'])->fetch(PDO::FETCH_ASSOC);
-            if($usr['role'] == 1){
-              $role = "student";
-            }else{
-              $role = "teacher";
-            }
-          } ?>
           <form class="edituser" action="/include/user_register.php" method="POST">
             <input type="text" value="<?php echo $usr['name'] ?>" name="name" placeholder="User name">
-            <input type="text" name="pwd" placeholder="Password">
+            <input type="text" name="pwd" placeholder="Password is hashed">
             <?php if(isset($_GET['id'])){
               echo '<input type="text" name="id" value="'.$_GET['id'].'" hidden>';
             } ?>
@@ -31,7 +34,7 @@
               </select>
             </span>
             <span class="submiter">
-              <button type="button" name="button">Cancel</button>
+              <button type="button" name="button" onclick="window.location.href=`/admin/index.php`">Cancel</button>
               <button type="submit" name="button">Submit</button>
             </span>
           </form>
@@ -54,8 +57,6 @@
           </span>
           <div class="shower">
             <?php
-            $users = $conn->query("SELECT * FROM `users` WHERE `role`=1 OR `role`=2")->fetchAll();
-
             foreach ($users as $user) {
               if($user['role'] == 1){
                 $role = "student";
