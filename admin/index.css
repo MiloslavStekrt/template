@@ -42,10 +42,18 @@ form{
   margin: 10px;
 }
 form button{
+  color: white;
+  font-weight: bold;
   margin: 10px 0;
   background-color: green;
   border-radius: 10px;
   padding: 10px;
+}
+.submiter{
+  display: flex;
+}
+.submiter button{
+  flex: 1 1 auto;
 }
 .massage{
   border-top: 2.5px solid #cacaca;
