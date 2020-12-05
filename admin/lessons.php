@@ -18,6 +18,7 @@
          <form class="edituser" action="/include/create_class.php" method="POST">
            <input type="text" name="name" value="<?php echo $lesson['name']; ?>" placeholder="Subject name">
            <input type="text" name="time" value="<?php echo $lesson['time']; ?>" placeholder="What time? PO-1,2 . UT-2,3 . ST-8">
+           <input type="text" name="id" value="<?php echo $lesson['id']; ?>" hidden>
            <span class="origin">
              <select name="teachername">
                <?php
