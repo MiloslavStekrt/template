@@ -14,7 +14,7 @@ if($role == "principal"){
 }
 
 if(isset($_POST['id'])){
-  if(!isset($_POST['pwd'])){
+  if(isset($_POST['pwd'])){
     $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
     $conn->prepare("UPDATE `users` SET `name` = ?,`pwd` = ?, `email` = ?, `role` = ? WHERE `users`.`id` = ?")->execute([$_POST['name'], $pwd, $_POST['email'], $role, $id]);
   }else{
