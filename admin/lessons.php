@@ -40,22 +40,25 @@
            </span>
          </form>
        </article>
-       <form class="student-select" method="POST">
+       <form class="student-select" action="/include/class_user.php" method="POST">
          <h1>Student</h1>
          <article class="student_list">
            <?php foreach ($users_student as $student): ?>
              <div>
+               <input type="text" name="id_class" value="<?php echo $_GET['id'] ?>" hidden disabled>
                <?php
                $checked = false;
-               foreach ($variable as $key => $value) {
-                 if($student['id'] == $class_users['id_user']){
-                   $checked = true;
+               if(isset($class_users)){
+                 foreach ($class_users as $users_class) {
+                   if($student['id'] == $users_class['id_user']){
+                     $checked = true;
+                   }
                  }
                }
                if ($checked): ?>
-                 <input type="checkbox" id="<?php echo $student['id'] ?>" name="<?php echo $student['id'] ?>" value="<?php echo $student['id'] ?>">
+                 <input type="checkbox" name="list_user[]" value="<?php echo $student['id'] ?>" checked>
                <?php else: ?>
-                 <input type="checkbox" id="<?php echo $student['id'] ?>" name="<?php echo $student['id'] ?>" value="<?php echo $student['id'] ?>">
+                 <input type="checkbox" name="list_user[]" value="<?php echo $student['id'] ?>">
                <?php endif; ?>
                <label for="<?php echo $student['id'] ?>"><?php echo $student['name'] ?></label>
              </div>
