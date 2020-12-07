@@ -6,10 +6,11 @@
   if(isset($_GET['id'])){
     $lesson = $conn->query("SELECT * FROM `classes` WHERE `id`=".$_GET['id'])->fetch(PDO::FETCH_ASSOC);
     $usr = $conn->query("SELECT * FROM `users` WHERE `id`=".$lesson['id'])->fetch(PDO::FETCH_ASSOC);
+    $class_users = $conn->query("SELECT * FROM `class_student` WHERE `id_class`=".$_GET['id']);
   }
   $users_all = $conn->query("SELECT * FROM `users` WHERE `role`=2")->fetchAll();
-  $users_student = $conn->query("SELECT * FROM `users` WHERE `role`=1")->fetchAll();
   $lessons_all = $conn->query("SELECT * FROM `classes`")->fetchAll();
+  $users_student = $conn->query("SELECT * FROM `users` WHERE `role`=1")->fetchAll();
   $conn = null;
 ?>
    <main>
@@ -43,10 +44,21 @@
          <h1>Student</h1>
          <article class="student_list">
            <?php foreach ($users_student as $student): ?>
-             <span>
-               <input type="checkbox" id="<?php echo $student['id'] ?>" name="<?php echo $student['id'] ?>" value="<?php echo $student['id'] ?>">
+             <div>
+               <?php
+               $checked = false;
+               foreach ($variable as $key => $value) {
+                 if($student['id'] == $class_users['id_user']){
+                   $checked = true;
+                 }
+               }
+               if ($checked): ?>
+                 <input type="checkbox" id="<?php echo $student['id'] ?>" name="<?php echo $student['id'] ?>" value="<?php echo $student['id'] ?>">
+               <?php else: ?>
+                 <input type="checkbox" id="<?php echo $student['id'] ?>" name="<?php echo $student['id'] ?>" value="<?php echo $student['id'] ?>">
+               <?php endif; ?>
                <label for="<?php echo $student['id'] ?>"><?php echo $student['name'] ?></label>
-             </span>
+             </div>
            <?php endforeach; ?>
          </article>
          <button type="submit" name="button">Submit</button>

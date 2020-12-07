@@ -144,15 +144,14 @@ input, select{
 }
 .student_list{
   display: flex;
-  width: 300px;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  height: 30vh;
+  width: 120%;
 }
-.student_list input{
-  flex: none;
-  margin-right: 20px;
-  padding: 2px 10px;
-  border-top: 2px solid black;
+.student-select{
+  width: 40vw
 }
-.student_list span{
-  flex: 1 1 auto;
-  flex-wrap:wrap;
+.student_list>* {
+  flex: 1 1 160px;
 }
