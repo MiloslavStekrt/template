@@ -31,7 +31,7 @@
               <select class="" name="role">
                 <option value="student" <?php if($role == "student") echo 'selected="selected"'; ?>>Student</option>
                 <option value="teacher" <?php if($role == "teacher") echo 'selected="selected"'; ?>>Teacher</option>
-                <option value="principal">Principal</option>
+                <option value="principal" <?php if($role == "principal") echo 'selected="selected"'; ?>>Principal</option>
               </select>
             </span>
             <span class="submiter">

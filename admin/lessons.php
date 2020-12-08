@@ -14,7 +14,7 @@
     $usr = $conn->query("SELECT * FROM `users` WHERE `id`=".$lesson['id'])->fetch(PDO::FETCH_ASSOC);
     $class_users = $conn->query("SELECT * FROM `class_student` WHERE `id_class`=".$id)->fetchAll();
   }
-  $users_all = $conn->query("SELECT * FROM `users` WHERE `role`=2")->fetchAll();
+  $users_all = $conn->query("SELECT * FROM `users` WHERE `role`=2 OR `role`=3")->fetchAll();
   $lessons_all = $conn->query("SELECT * FROM `classes`")->fetchAll();
   $users_student = $conn->query("SELECT * FROM `users` WHERE `role`=1")->fetchAll();
   $conn = null;
