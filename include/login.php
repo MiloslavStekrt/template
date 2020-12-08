@@ -20,6 +20,7 @@ $dates = $res->fetch(PDO::FETCH_ASSOC);
 
 if(password_verify($pwd, $dates['pwd'])){
   $_SESSION['id'] = $dates['id'];
+  $_SESSION['email'] = $_POST['uid'];
   $_SESSION['name'] = $dates['name'];
   $_SESSION['role'] = $dates['role'];
   $_SESSION['auth'] = $dates['auth'];
