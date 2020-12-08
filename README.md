@@ -1,3 +1,2 @@
-School Managment System with fee and marks.
-
-Design PHP, Bootstrap.
+#This is project about construct School Menagment System
+including classes controller, students controller, teacher controller
