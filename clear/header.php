@@ -23,7 +23,7 @@ session_start();
             <a href="/school.php">My School</a>
             <a href="/homeworks.php">Homeworks</a>
             <a href="/exams.php">Exams</a>
-            <a href="">Elearning</a>
+            <a href="/elerning.php">Elearning</a>
             <?php
             if($_SESSION['role'] == 3){
               echo '<a href="/admin">admin</a>';

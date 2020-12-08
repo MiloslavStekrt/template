@@ -8,6 +8,9 @@ if(!isset($_POST['button']) || empty($list_user)){
 }
 
 include_once 'db-connect.php';
+
+$conn->prepare("DELETE FROM `class_student` WHERE `id_class`=?")->execute([$id_class]);
+
 foreach($list_user as $user){
   echo "insert items .... ".$id_class." and ".$user;
   $conn->prepare("INSERT INTO `class_student`(`id_class`, `id_user`) VALUES (?, ?)")->execute([$id_class, $user]);

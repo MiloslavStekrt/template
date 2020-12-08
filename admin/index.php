@@ -13,6 +13,7 @@
       $role = "teacher";
     }
   }
+  $conn = null;
 
 ?>
     <main>
