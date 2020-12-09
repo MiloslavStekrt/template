@@ -8,28 +8,26 @@
   include_once 'clear/header.php';
 
   include_once 'include/db-connect.php';
-  $stmt = $conn->prepare("SELECT * FROM `classes` WHERE `teacher`=?")->execute([$_SESSION['id']]);
-  if($data == true){
-    $data = $stmt->fetchAll();
-  }else {
-    $data = ['name'=>'none'];
+  $classes = $conn->query("SELECT * FROM `classes` WHERE `teacher`=".$_SESSION['id'].";")->fetchAll();
+  if(isset($_GET['id']) || $_GET['id'] != ""){
+    $homeworks = $conn->query("SELECT * FROM `homeworks` WHERE `id_class`=".$_GET['id']."")->fetchAll();
   }
-  $stmt = null;
   $conn = null;
 
 ?>
 <main>
   <section class="sidebar">
     <select class="" name="">
-      <?php foreach ($data as $dat): ?>
-        <a href="homeworks.php?class=<?php echo $dat['name'] ?>"></a>
-      <?php endforeach; ?>
+      <?php foreach ($classes as $class){
+        echo '<option onclick="window.location.href=`homeworks.php?id='.$class['id'].'`">'.$class['name'].'</option>';
+      } ?>
     </select>
     <h1>Homeworks</h1>
-    <p><?php echo $_SESSION['id'] ?></p>
-    <p><a href="">Ut - 192/12 c ucebnice</a></p>
-    <p><a href="">Ut - 192/12 c ucebnice</a></p>
-    <p><a href="">Ut - 192/12 c ucebnice</a></p>
+    <?php foreach ($homeworks as $homework){
+      $timing = $homework['time'].split(" "); 
+      $date = new DateTime($timing[0]);
+      echo '<p><a href="">'.$date.' - '.$homework['name'].'</a> </p>';
+    } ?>
     <p><a href="new_homework.php">new Homework</a></p>
   </section>
   <section class="control">
