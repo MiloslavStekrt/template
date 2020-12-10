@@ -11,6 +11,10 @@
   $classes = $conn->query("SELECT * FROM `classes` WHERE `teacher`=".$_SESSION['id'].";")->fetchAll();
   if(isset($_GET['id']) || $_GET['id'] != ""){
     $homeworks = $conn->query("SELECT * FROM `homeworks` WHERE `id_class`=".$_GET['id']."")->fetchAll();
+    if(isset($_GET['home']) || $_GET['home'] != ""){
+      // get homework where $_GET['home'] = id
+      $home = $conn->query("SELECT * FROM `homeworks` WHERE `id`=".$_GET['home'])->fetch(PDO::FETCH_ASSOC);
+    }
   }
   $conn = null;
 
@@ -24,16 +28,16 @@
     </select>
     <h1>Homeworks</h1>
     <?php foreach ($homeworks as $homework){
-      $timing = $homework['time'].split(" "); 
-      $date = new DateTime($timing[0]);
-      echo '<p><a href="">'.$date.' - '.$homework['name'].'</a> </p>';
+      $date = date("d.m", strtotime($homework['time']));
+
+      echo '<p><a href="homeworks.php?'.$_SERVER['QUERY_STRING'].'&home='.$homework['id'].'">'.$date.' - '.$homework['name'].'</a> </p>';
     } ?>
     <p><a href="new_homework.php">new Homework</a></p>
   </section>
   <section class="control">
     <article class="avg">
       <span>
-        <h1>Homework title</h1>
+        <h1><?php echo $home['name']; ?></h1>
       </span>
       <h1>complete 8/12</h1>
     </article>
