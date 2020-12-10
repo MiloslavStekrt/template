@@ -48,38 +48,41 @@
     <p><a href="new_homework.php">new Homework</a></p>
   </section>
   <section class="control">
-    <article class="avg">
-      <span>
-        <?php
-        if(isset($home) || $home != ""){
-          echo '<h1>'.$home['name'].'</h1>';
-        }else{
-          echo "<h1>TEST name</h1>";
-        } ?>
-      </span>
-      <h1>complete 8/12</h1>
-    </article>
-    <article class="setter">
-      <span>
-        <h3>name of student</h3>
-        <p>mark</p>
-      </span>
-      <?php if ($homeworks): ?>
-        <?php foreach ($students_names as $student_name): ?>
-          <span>
-            <label for="student_id"><?php echo $student_name["name"]; ?></label>
-            <input type="text" id="student_id" name="student<?php echo $student_name['id'] ?>" value="<?php echo $student_name['id']; ?>" hidden>
-            <div class="">
-              <select name="student_avg[]">
-                <option value="<?php echo $student_name['id'] ?>_N">N</option>
-                <option value="<?php echo $student_name['id'] ?>_1">1</option>
-                <option value="<?php echo $student_name['id'] ?>_5">5</option>
-              </select>
-              <a href="" target="_blank">Open</a>
-            </div>
-          </span>
-        <?php endforeach; ?>
-      <?php endif; ?>
+    <form action="/include/home_students.php" method="post">
+      <article class="avg">
+        <span>
+          <?php
+          if(isset($home) || $home != ""){
+            echo '<h1>'.$home['name'].'</h1>';
+          }else{
+            echo "<h1>TEST name</h1>";
+          } ?>
+        </span>
+        <h1>complete 8/12</h1>
+      </article>
+      <article class="setter">
+        <span>
+          <h3>name of student</h3>
+          <p>mark <button type="submit" name="button">Grade</button> </p>
+        </span>
+        <input type="text" name="id_home" value="<?php echo $home['id'] ?>" hidden>
+        <?php if ($homeworks): ?>
+          <?php foreach ($students_names as $student_name): ?>
+            <span>
+              <label for="student_id"><?php echo $student_name["name"]; ?></label>
+              <input type="text" id="student_id" name="student<?php echo $student_name['id'] ?>" value="<?php echo $student_name['id']; ?>" hidden>
+              <div class="">
+                <select name="student_avg[]">
+                  <option value="<?php echo $student_name['id'] ?>_0">N</option>
+                  <option value="<?php echo $student_name['id'] ?>_1">1</option>
+                  <option value="<?php echo $student_name['id'] ?>_5">5</option>
+                </select>
+                <a href="" target="_blank">Open</a>
+              </div>
+            </span>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </form>
     </article>
   </section>
 </main>
