@@ -8,13 +8,26 @@
   include_once 'clear/header.php';
 
   include_once 'include/db-connect.php';
-  $classes = $conn->query("SELECT * FROM `classes` WHERE `teacher`=".$_SESSION['id'].";")->fetchAll();
-  if(isset($_GET['id']) || $_GET['id'] != ""){
-    $homeworks = $conn->query("SELECT * FROM `homeworks` WHERE `id_class`=".$_GET['id']."")->fetchAll();
+  $user_id = $_SESSION['id'];
+  $class_id = $_GET['id'];
+  $classes = $conn->query("SELECT * FROM `classes` WHERE `teacher`=".$user_id)->fetchAll();
+  if(isset($class_id) || $class_id != ""){
+    $homeworks = $conn->query("SELECT * FROM `homeworks` WHERE `id_class`=".$class_id)->fetchAll();
+    $students_in = $conn->query("SELECT * FROM `class_student` WHERE `id_class`=".$class_id)->fetchAll();
+
+
     if(isset($_GET['home']) || $_GET['home'] != ""){
-      // get homework where $_GET['home'] = id
-      $home = $conn->query("SELECT * FROM `homeworks` WHERE `id`=".$_GET['home'])->fetch(PDO::FETCH_ASSOC);
+      $homework = $_GET['home'];
+      $students_names = [];
+      foreach ($students_in as $student_in) {
+        $stmt = $conn->query("SELECT `id`,`name` FROM `users` WHERE `id`=".$student_in['id_user'])->fetch(PDO::FETCH_ASSOC);
+        $students_names[] = ['id' => $stmt['id'], 'name' => $stmt['name']];
+      }
+      $home = $conn->query("SELECT * FROM `homeworks` WHERE `id`=".$homework)->fetch(PDO::FETCH_ASSOC);
     }
+  }elseif($classes){
+    header("location: homeworks.php?id=".$classes[0]['id']);
+    die();
   }
   $conn = null;
 
@@ -37,7 +50,12 @@
   <section class="control">
     <article class="avg">
       <span>
-        <h1><?php echo $home['name']; ?></h1>
+        <?php
+        if(isset($home) || $home != ""){
+          echo '<h1>'.$home['name'].'</h1>';
+        }else{
+          echo "<h1>TEST name</h1>";
+        } ?>
       </span>
       <h1>complete 8/12</h1>
     </article>
@@ -46,116 +64,22 @@
         <h3>name of student</h3>
         <p>mark</p>
       </span>
-      <span>
-        <p>name student</p>
-        <div class="">
-          <select class="" name="">
-            <option value="">N</option>
-            <option value="">1</option>
-            <option value="">5</option>
-          </select>
-          <a href="" target="_blank">Open</a>
-        </div>
-      </span>
-      <span>
-        <p>name student</p>
-        <div class="">
-          <select class="" name="">
-            <option value="">N</option>
-            <option value="">1</option>
-            <option value="">5</option>
-          </select>
-          <a href="" target="_blank">Open</a>
-        </div>
-      </span>
-      <span>
-        <p>name student</p>
-        <div class="">
-          <select class="" name="">
-            <option value="">N</option>
-            <option value="">1</option>
-            <option value="">5</option>
-          </select>
-          <a href="" target="_blank">Open</a>
-        </div>
-      </span>
-      <span>
-        <p>name student</p>
-        <div class="">
-          <select class="" name="">
-            <option value="">N</option>
-            <option value="">1</option>
-            <option value="">5</option>
-          </select>
-          <a href="" target="_blank">Open</a>
-        </div>
-      </span>
-      <span>
-        <p>name student</p>
-        <div class="">
-          <select class="" name="">
-            <option value="">N</option>
-            <option value="">1</option>
-            <option value="">5</option>
-          </select>
-          <a href="" target="_blank">Open</a>
-        </div>
-      </span>
-      <span>
-        <p>name student</p>
-        <div class="">
-          <select class="" name="">
-            <option value="">N</option>
-            <option value="">1</option>
-            <option value="">5</option>
-          </select>
-          <a href="" target="_blank">Open</a>
-        </div>
-      </span>
-      <span>
-        <p>name student</p>
-        <div class="">
-          <select class="" name="">
-            <option value="">N</option>
-            <option value="">1</option>
-            <option value="">5</option>
-          </select>
-          <a href="" target="_blank">Open</a>
-        </div>
-      </span>
-      <span>
-        <p>name student</p>
-        <div class="">
-          <select class="" name="">
-            <option value="">N</option>
-            <option value="">1</option>
-            <option value="">5</option>
-          </select>
-          <a href="" target="_blank">Open</a>
-        </div>
-      </span>
-      <span>
-        <p>name student</p>
-        <div class="">
-          <select class="" name="">
-            <option value="">N</option>
-            <option value="">1</option>
-            <option value="">5</option>
-          </select>
-          <a href="" target="_blank">Open</a>
-        </div>
-      </span>
-      <span>
-        <p>name student</p>
-        <div class="">
-          <select class="" name="">
-            <option value="">N</option>
-            <option value="">1</option>
-            <option value="">5</option>
-          </select>
-          <a href="" target="_blank">Open</a>
-        </div>
-      </span>
+      <?php if ($homeworks): ?>
+        <?php foreach ($students_names as $student_name): ?>
+          <span>
+            <label for="student_id"><?php echo $student_name["name"]; ?></label>
+            <input type="text" id="student_id" name="student<?php echo $student_name['id'] ?>" value="<?php echo $student_name['id']; ?>" hidden>
+            <div class="">
+              <select name="student_avg[]">
+                <option value="<?php echo $student_name['id'] ?>_N">N</option>
+                <option value="<?php echo $student_name['id'] ?>_1">1</option>
+                <option value="<?php echo $student_name['id'] ?>_5">5</option>
+              </select>
+              <a href="" target="_blank">Open</a>
+            </div>
+          </span>
+        <?php endforeach; ?>
+      <?php endif; ?>
     </article>
   </section>
 </main>
