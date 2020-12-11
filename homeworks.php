@@ -15,15 +15,15 @@
     $homeworks = $conn->query("SELECT * FROM `homeworks` WHERE `id_class`=".$class_id)->fetchAll();
     $students_in = $conn->query("SELECT * FROM `class_student` WHERE `id_class`=".$class_id)->fetchAll();
 
-    if(isset($_GET['home']) || $_GET['home'] != ""){
-      $homework = $_GET['home'];
-      $home_marks = $conn->query("SELECT `id_user`, `mark` FROM `homeworks_user` WHERE `id_home`=".$homework)->fetchAll();
-      $students_names = [];
+    if($_GET['home'] != ""){
+      $homework_id = $_GET['home'];
+      $homeworks_marks = $conn->query("SELECT `id_user`, `mark` FROM `homeworks_user` WHERE `id_home`=".$homework_id)->fetchAll();
+      $students_info = array();
       foreach ($students_in as $student_in) {
-        $stmt = $conn->query("SELECT `id`,`name` FROM `users` WHERE `id`=".$student_in['id_user'])->fetch(PDO::FETCH_ASSOC);
-        $students_names[] = ['id' => $stmt['id'], 'name' => $stmt['name']];
+        $user = $conn->query("SELECT `id`,`name` FROM `users` WHERE `id`=".$student_in['id_user'])->fetch(PDO::FETCH_ASSOC);
+        array_push($students_info, array('id' => $user['id'], 'name' => $user['name']));
       }
-      $home = $conn->query("SELECT * FROM `homeworks` WHERE `id`=".$homework)->fetch(PDO::FETCH_ASSOC);
+      $home = $conn->query("SELECT * FROM `homeworks` WHERE `id`=".$homework_id)->fetch(PDO::FETCH_ASSOC);
     }
   }elseif($classes){
     header("location: homeworks.php?id=".$classes[0]['id']);
@@ -66,36 +66,16 @@
           <p>mark <button type="submit" name="button">Grade</button> </p>
         </span>
         <input type="text" name="id_home" value="<?php echo $home['id'] ?>" hidden>
-        <?php if ($homeworks): ?>
-          <?php foreach ($students_names as $student_name): ?>
+        <?php if ($homework_id): ?>
+          <?php foreach ($students_info as $student_info): ?>
             <span>
-              <label for="student_id"><?php echo $student_name["name"]; ?></label>
-              <input type="text" id="student_id" name="student<?php echo $student_name['id'] ?>" value="<?php echo $student_name['id']; ?>" hidden>
-              <div class="">
-                  <select name="student_avg[]">
-                    <?php if( (int)$home_mark['mark'] == 0 && $home_mark['id_user'] == $student_name['id']): ?>
-                      <option value="<?php echo $student_name['id'] ?>_0" selected>N</option>
-                      <option value="<?php echo $student_name['id'] ?>_1">1</option>
-                      <option value="<?php echo $student_name['id'] ?>_5">5</option>
-                    <?php elseif( (int)$home_mark['mark'] == 1 && $home_mark['id_user'] == $student_name['id']): ?>
-                      <option value="<?php echo $student_name['id'] ?>_0">N</option>
-                      <option value="<?php echo $student_name['id'] ?>_1" selected>1</option>
-                      <option value="<?php echo $student_name['id'] ?>_5">5</option>
-                      <!-- ( (int)$home_mark['mark'] == 5 && $home_mark['id_user'] == $student_name['id']): -->
-                    <?php else: ?>
-                      <option value="<?php echo $student_name['id'] ?>_0">N</option>
-                      <option value="<?php echo $student_name['id'] ?>_1">1</option>
-                      <option value="<?php echo $student_name['id'] ?>_5" selected>5</option>
-                    <?php endif; ?>
-
-                  <!-- 
-                    <option value="<?php echo $student_name['id'] ?>_0">N</option>
-                    <option value="<?php echo $student_name['id'] ?>_1">1</option>
-                    <option value="<?php echo $student_name['id'] ?>_5">5</option> -->
-                  </select>
-                <!-- <?php echo "student: ".$student_name['id']." mark_user: ".$home_marks['id_user'] ?> -->
-                <a href="" target="_blank">Open</a>
-              </div>
+              <label for="student_id"><?php echo $student_info["name"]; ?></label>
+              <input type="text" id="student_id" name="student<?php echo $student_info['id'] ?>" value="<?php echo $student_info['id']; ?>" hidden>
+              <select name="student_avg[]">
+                <option value="<?php echo $student_info['id'] ?>_N">N</option>
+                <option value="<?php echo $student_info['id'] ?>_1">1</option>
+                <option value="<?php echo $student_info['id'] ?>_5">5</option>
+              </select>
             </span>
           <?php endforeach; ?>
         <?php endif; ?>
