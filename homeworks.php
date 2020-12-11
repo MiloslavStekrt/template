@@ -26,6 +26,11 @@
       $home = $conn->query("SELECT * FROM `homeworks` WHERE `id`=".$homework_id)->fetch(PDO::FETCH_ASSOC);
     }
   }elseif($classes){
+    $homework_id = $_GET['home'];
+    if($homework_id != ""){
+      header("location: homeworks.php?id=".$classes[0]['id']."&home=".$homework_id);
+      die();
+    }
     header("location: homeworks.php?id=".$classes[0]['id']);
     die();
   }
@@ -70,11 +75,20 @@
           <?php foreach ($students_info as $student_info): ?>
             <span>
               <label for="student_id"><?php echo $student_info["name"]; ?></label>
-              <input type="text" id="student_id" name="student<?php echo $student_info['id'] ?>" value="<?php echo $student_info['id']; ?>" hidden>
+              <input type="text" id="student_id" name="student" value="<?php echo $student_info['id']; ?>" hidden>
+              <?php foreach ($homeworks_marks as $homework_mark){
+                if ($homework_mark['id_user'] == $student_info['id'] && $homework_mark['mark'] == 0) {
+                  $home_mark = 0;
+                }elseif ($homework_mark['id_user'] == $student_info['id'] && $homework_mark['mark'] == 1) {
+                  $home_mark = 1;
+                }elseif ($homework_mark['id_user'] == $student_info['id'] && $homework_mark['mark'] == 5){
+                  $home_mark = 5;
+                }
+              } ?>
               <select name="student_avg[]">
-                <option value="<?php echo $student_info['id'] ?>_N">N</option>
-                <option value="<?php echo $student_info['id'] ?>_1">1</option>
-                <option value="<?php echo $student_info['id'] ?>_5">5</option>
+                <option value="<?php echo $student_info['id'] ?>_0" <?php if($home_mark == 0){ echo "selected=true";} ?>>N</option>
+                <option value="<?php echo $student_info['id'] ?>_1" <?php if($home_mark == 1){ echo "selected=true";} ?>>1</option>
+                <option value="<?php echo $student_info['id'] ?>_5" <?php if($home_mark == 5){ echo "selected=true";}  ?>>5</option>
               </select>
             </span>
           <?php endforeach; ?>
