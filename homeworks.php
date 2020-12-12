@@ -35,7 +35,6 @@
     die();
   }
   $conn = null;
-
 ?>
 <main>
   <section class="sidebar">
@@ -53,7 +52,7 @@
     <p><a href="new_homework.php">new Homework</a></p>
   </section>
   <section class="control">
-    <form action="/include/home_students.php" method="post">
+    <form action="/include/home_students.php" method="post" id="app">
       <article class="avg">
         <span>
           <?php
@@ -72,28 +71,35 @@
         </span>
         <input type="text" name="id_home" value="<?php echo $home['id'] ?>" hidden>
         <?php if ($homework_id): ?>
-          <?php foreach ($students_info as $student_info): ?>
-            <span>
-              <label for="student_id"><?php echo $student_info["name"]; ?></label>
-              <input type="text" id="student_id" name="student" value="<?php echo $student_info['id']; ?>" hidden>
-              <?php foreach ($homeworks_marks as $homework_mark){
-                if ($homework_mark['id_user'] == $student_info['id'] && $homework_mark['mark'] == 0) {
-                  $home_mark = 0;
-                }elseif ($homework_mark['id_user'] == $student_info['id'] && $homework_mark['mark'] == 1) {
-                  $home_mark = 1;
-                }elseif ($homework_mark['id_user'] == $student_info['id'] && $homework_mark['mark'] == 5){
-                  $home_mark = 5;
+          <span id="app">
+
+          </span>
+
+          <script type="text/javascript">
+            const App = (
+              data() {
+                return {
+                  student: [
+                    <?php foreach($students_info as $student_info){
+                      echo '{'.$student_info['id'].','.$student_info['name'].'}';
+                    } ?>
+                  ]
                 }
-              } ?>
-              <select name="student_avg[]">
-                <option value="<?php echo $student_info['id'] ?>_0" <?php if($home_mark == 0){ echo "selected=true";} ?>>N</option>
-                <option value="<?php echo $student_info['id'] ?>_1" <?php if($home_mark == 1){ echo "selected=true";} ?>>1</option>
-                <option value="<?php echo $student_info['id'] ?>_5" <?php if($home_mark == 5){ echo "selected=true";}  ?>>5</option>
-              </select>
-            </span>
-          <?php endforeach; ?>
+              }
+            )
+            const app = Vue.createApp(App)
+
+            app.component('user',{
+              template: ``
+            })
+
+            app.mount("#app")
+          </script>
+
+
         <?php endif; ?>
       </form>
     </article>
   </section>
+  <script src="js/homework.js" charset="utf-8"></script>
 </main>

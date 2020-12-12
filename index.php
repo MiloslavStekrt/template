@@ -28,7 +28,7 @@ include_once 'clear/header.php';?>
                 <p>compute test difficulty.</p>
             </article>
         </section>
-        <section class="popularCompanies">
+        <section id="popularCompanies" class="popularCompanies">
             <a class="school">
                 <img src="" alt="Logo of School">
                 <p>School name</p>
