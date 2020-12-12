@@ -10,7 +10,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title ?></title>
-    <script src="../js/vue.js" charset="utf-8"></script>
+    <script src="../js/vue-3.js" charset="utf-8"></script>
     <link rel="stylesheet" href="/css/master.css">
     <link rel="stylesheet" href=<?php echo $stylefile ?>>
 </head>
