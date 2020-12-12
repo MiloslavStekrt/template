@@ -1,4 +1,10 @@
 <?php
+  //basic defence for user with role 3
+  if($_SESSION['id'] > 3){
+    header("location: /");
+    die();
+  }
+
   $title="BMS - users";
   $stylefile="/admin/index.css";
   include_once '../clear/header.php';
@@ -64,7 +70,7 @@
               }else{
                 $role = "teacher";
               }
-              echo '<button onclick="window.location.href=`/admin/index.php?id='.$user['id'].'`;" type="submit"><p>'.$user["name"].'</p><p>'.$role.'</p></button>';
+              echo '<button onclick="window.location.href=`/admin/index.php?id='.$user['id'].'`;" type="button"><p>'.$user["name"].'</p><p>'.$role.'</p></button>';
             }
             ?>
           </div>
