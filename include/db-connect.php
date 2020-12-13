@@ -1,24 +1,17 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "AdminLuser";
+$servername = "localhost",
+$username = "beam-node";
+$password = "ZLZk!u9@wb5eszm",
+$database = 'beam-ms'
 
-// function generate($dbname, $nick, $pwd){
-//   try{
-//     $conn = new PDO("mysql:host=localhost;dbname=$dbname", $nick, $pwd);
-//     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//   } catch(PDOException $e) {
-//     header("location: /");
-//     die();
-//   }
-//   return $conn;
-// }
-//
-//
+// $servername = "sql4.webzdarma.cz";
+// $username = "bmseuwebcz3542";
+// $password = "qd6cp5rXl(3V14J2%f$-";
+// $database = "bmseuwebcz3542"
 
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=beam-ms", $username, $password);
+  $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
   // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
