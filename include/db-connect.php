@@ -1,9 +1,9 @@
 <?php
 
-$servername = "localhost",
+$servername = "localhost";
 $username = "beam-node";
-$password = "ZLZk!u9@wb5eszm",
-$database = 'beam-ms'
+$password = "ZLZk!u9@wb5eszm";
+$database = 'beam-ms';
 
 // $servername = "sql4.webzdarma.cz";
 // $username = "bmseuwebcz3542";
