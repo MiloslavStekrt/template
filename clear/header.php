@@ -2,6 +2,9 @@
 if(!isset($stylefile)){
   $stylefile = "css/".basename($_SERVER['SCRIPT_NAME'], ".php").".css";
 }
+// $logolink = "BEAM MS";
+$logolink = mb_strtoupper("Leviathan dev.");
+$linkLocation = "/";
 session_start();
 ?>
 <!DOCTYPE html>
@@ -17,7 +20,7 @@ session_start();
 <body>
   <header>
         <!-- <img src="" alt="logo"> -->
-        <a href="/"><h1>BEAM MS</h1></a>
+        <a href="<?php echo $linkLocation ?>"><h1><?php echo $logolink ?></h1></a>
         <nav>
           <?php if ($_SESSION['role'] >= 2): ?>
             <a href="/school.php">My School</a>
