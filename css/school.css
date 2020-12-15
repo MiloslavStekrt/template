@@ -2,7 +2,9 @@
 .details{
   text-align: center;
   width: 60vw;
-  background-color: whitesmoke;
+  background-color: #cfcfcf;
+  box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.4),
+  inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
   padding: 10px;
   margin: 50px auto;
   border-radius: 20px;
@@ -36,20 +38,31 @@
   padding-left: 5%;
   color: whitesmoke
 }
-.lessons{
+.lessons, table{
   display: flex;
   color: white;
 }
-.lessons p{
+.lessons p, table td, table th{
   cursor: pointer;
   text-align: center;
-  border: 1px solid blue;
   font-size: 150%;
-  padding: 25px 0px;
+  padding: 25px 25px;
   flex: 1 1 auto;
 }
-.lessons p:hover{
+table tr{
+  display: flex;
+}
+tr *{
+  flex: 1 1 auto;
+}
+table tbody{
+  width: 100%;
+}
+tr *:hover{
   background-color: blue;
+}
+.nothing:hover{
+  background-color: #67f
 }
 /* activities */
 .activities{
