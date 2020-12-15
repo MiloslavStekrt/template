@@ -5,7 +5,11 @@ include_once 'clear/header.php';?>
         <section class="uvod">
             <h1>Welcome to <strong>BEAM Managment System</strong></h1>
             <p>We are the way to do your <strong>managment of students</strong>. <br> You will know <strong>everything</strong> you need and do <strong>everything</strong> you want.</p>
-            <a href="login.php"><strong>JOIN TO US</strong></a>
+            <?php if ($_SESSION['role'] < 0): ?>
+              <a href="login.php"><strong>JOIN TO US</strong></a>
+            <?php else: ?>
+              <a href="school.php"><strong>My School</strong></a>
+            <?php endif; ?>
         </section>
         <section class="qasection">
             <article>
