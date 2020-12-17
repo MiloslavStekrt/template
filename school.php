@@ -13,29 +13,86 @@ include_once 'clear/header.php';?>
   </section>
   <section class="schedule">
     <h2>Schedule</h2>
-    <article class="hodiny">
+    <div class="flexer">
+      <article class="days">
+        <p class="mo"><strong>Monday</strong> </p>
+        <p class="tu"><strong>Tuesday</strong> </p>
+        <p class="we"><strong>Wensday</strong> </p>
+      </article>
+      <article class="schedule-time">
+        <table>
+          <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+          </tr>
+          <tr class="mo">
+            <td></td>
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+          </tr>
+          <tr class="tu">
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+          </tr>
+          <tr class="we">
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+            <td>AJ</td>
+            <td></td>
+            <td>AJ</td>
+          </tr>
+        </table>
+      </article>
+    </div>
+    <!-- <article class="monday">
+      <p class="tag">Monday</p>
+      <p>M</p>
+      <p>M</p>
+      <p>AJ</p>
+      <p>CJ</p>
+      <p>AJ</p>
+      <p>CJ</p>
+      <p>L</p>
       <p> </p>
-      <p>1</p>
-      <p>2</p>
-      <p>3</p>
-      <p>4</p>
-      <p>5</p>
-      <p>6</p>
-      <p>7</p>
-      <p>8</p>
-    </article>
-    <article class="monday">
-      <p>Monday</p>
-      <p>Thruesday</p>
-      <p>Frieday</p>
     </article>
     <article class="tuesday">
-      <p>Tuesday</p>
-
+      <p class="tag">Tuesday</p>
+      <p>M</p>
+      <p>M</p>
+      <p>AJ</p>
+      <p>CJ</p>
+      <p> </p>
+      <p>L</p>
+      <p>AJ</p>
+      <p>CJ</p>
     </article>
     <article class="wensday">
-      <p>Wensday</p>
-
+      <p class="tag">Wensday</p>
+      <p>M</p>
+      <p>M</p>
+      <p>AJ</p>
+      <p> </p>
+      <p>CJ</p>
+      <p>AJ</p>
+      <p>CJ</p>
+      <p>L</p>
     </article>
     <article class="lessons">
       <h3>Monday</h3>
@@ -63,7 +120,7 @@ include_once 'clear/header.php';?>
       <p>CJ</p>
       <p>L</p>
       <p> </p>
-    </article>
+    </article> -->
   </section>
   <section class="activities">
     <article class="exams">
