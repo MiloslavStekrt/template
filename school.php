@@ -1,7 +1,27 @@
 <?php
-$title = "BMS - My School";
-$def = true;
-include_once 'clear/header.php';?>
+  session_start();
+  $title = "BMS - My School";
+  if($_SESSION['role'] <= 0 || empty($_SESSION['role']) || $_SESSION['role'] == ""){
+    header("location: /");
+    die();
+  }
+  include_once 'clear/header.php';
+  include_once 'include/db-connect.php';
+  if($_SESSION['role'] == 1){
+    // is student setup schedule
+    $myclasses_by_user = $conn->query("SELECT `id_class` FROM `class_student` WHERE `id_user`=".$_SESSION['id'])->fetchAll();
+    $myclasses = [];
+    foreach($myclasses_by_user as $myclass_by_user){
+      $myclasses[] = $conn->query("SELECT * FROM `classes` WHERE `id_class`=".$myclass_by_user['id_class'])->fetch(FETCH_ASSOC);
+    }
+    $myclasses_by_user = null;
+  }elseif ($_SESSION['role'] >= 2) {
+    // if user is teacher them
+    $myclasses = $conn->query("SELECT * FROM `classes` WHERE `teacher`=".$_SESSION['id'])->fetchAll();
+  }
+  $conn = null;
+
+?>
 
 <main>
   <section class="details">
