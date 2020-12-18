@@ -32,7 +32,7 @@
   width: 100px;
   display: flex;
   flex-direction: column;
-  padding-top: 6.9vh;
+  padding-top: 6.8vh;
 }
 .schedule-time{
   width: 100%;
@@ -74,7 +74,7 @@ table td:hover{
 /* days  */
 .schedule p{
   margin: 0;
-  padding: 12px 0;
+  padding: 13.5px 0;
   border-bottom: 2px solid #45c
 }
 .mo{
@@ -85,6 +85,12 @@ table td:hover{
 }
 .we{
   background-color: #f38
+}
+.th{
+  background-color: #8ac
+}
+.fr{
+  background-color: #c8a
 }
 /* activities */
 .activities{
