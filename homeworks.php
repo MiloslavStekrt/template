@@ -1,20 +1,22 @@
 <?php
   // teacher defend
-  if(!$_SESSION['role']=2){
+  session_start();
+  if($_SESSION['role'] < 2){
     header('location: school.php');
     die();
   }
   $title = "BMS - Homeworks";
   include_once 'clear/header.php';
 
-  include_once 'include/db-connect.php';
   $user_id = $_SESSION['id'];
   $class_id = $_GET['id'];
+
+  include_once 'include/db-connect.php';
+
   $classes = $conn->query("SELECT * FROM `classes` WHERE `teacher`=".$user_id)->fetchAll();
   if(isset($class_id) || $class_id != ""){
     $homeworks = $conn->query("SELECT * FROM `homeworks` WHERE `id_class`=".$class_id)->fetchAll();
     $students_in = $conn->query("SELECT * FROM `class_student` WHERE `id_class`=".$class_id)->fetchAll();
-
     if($_GET['home'] != ""){
       $homework_id = $_GET['home'];
       $homeworks_marks = $conn->query("SELECT `id_user`, `mark` FROM `homeworks_user` WHERE `id_home`=".$homework_id)->fetchAll();
