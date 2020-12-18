@@ -19,8 +19,37 @@
     // if user is teacher them
     $myclasses = $conn->query("SELECT * FROM `classes` WHERE `teacher`=".$_SESSION['id'])->fetchAll();
   }
+  $timer = [];
+  foreach ($myclasses as $myclass) {
+    //destroy to days and destroy to lessons
+    $time = $myclass['time'];
+    if(strpos($time, '.') !== false){
+      $items = explode('.', str_replace(' ', '', $time));
+    }else{
+      $items = [$items];
+    }
+    $ans = [];
+    foreach($items as $item){
+      $ans[] = explode('-', $item);
+    }
+    foreach ($ans as $answer) {
+      $timer[] = [
+        'id_class' => $myclass['id'],
+        'name' => $myclass['name'],
+        'day' => mb_strtolower($answer[0]),
+        'time' => (int)$answer[1]
+      ];
+    }
+  }
+  $schedule_days = [
+    ["name" => "monday", "color" => "mo"],
+    ["name" => "tuesday", "color" => "tu"],
+    ["name" => "wensday", "color" => "we"],
+    ["name" => "thursday", "color" => "th"],
+    ["name" => "frieday", "color" => "fr"],
+  ];
+  $max_lessons = 8;
   $conn = null;
-
 ?>
 
 <main>
@@ -35,112 +64,46 @@
     <h2>Schedule</h2>
     <div class="flexer">
       <article class="days">
-        <p class="mo"><strong>Monday</strong> </p>
-        <p class="tu"><strong>Tuesday</strong> </p>
-        <p class="we"><strong>Wensday</strong> </p>
+        <?php foreach ($schedule_days as $schedule_day): ?>
+          <p class="<?php echo $schedule_day['color'] ?>"><strong><?php echo ucfirst($schedule_day['name']) ?></strong> </p>
+        <?php endforeach; ?>
       </article>
-      <article class="schedule-time">
+      <article class="schedule-time" id="schedule-time">
         <table>
           <tr>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-            <th>6</th>
-            <th>7</th>
-            <th>8</th>
+            <?php for ($i=1; $i < $max_lessons+1; $i++) {
+              echo '<th>'.$i.'</th>';
+            } ?>
           </tr>
-          <tr class="mo">
-            <td></td>
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-          </tr>
-          <tr class="tu">
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-          </tr>
-          <tr class="we">
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-            <td>AJ</td>
-            <td></td>
-            <td>AJ</td>
-          </tr>
+          <?php
+
+            //pro kazdy den v poly skolni dny
+            foreach ($schedule_days as $schedule_day) {
+              echo "<tr class='".$schedule_day['color']."'>";
+
+              //pro kazdou hodinu v tydnu
+              for ($i=1; $i < $max_lessons+1; $i++) {
+                // jestli je
+                $breaker = true;
+                foreach ($timer as $timer_one) {
+                  if($schedule_day['color'] == $timer_one['day']){
+                    if($timer_one['time'] == $i){
+                      echo "day is same";
+                      echo "<td>".$timer_one['time']."</td>";
+                      $breaker = false;
+                    }
+                  }
+                }
+                if(!$breaker){
+                  echo "<td></td>";
+                }
+              }
+              echo "</tr>";
+            }
+          ?>
         </table>
       </article>
     </div>
-    <!-- <article class="monday">
-      <p class="tag">Monday</p>
-      <p>M</p>
-      <p>M</p>
-      <p>AJ</p>
-      <p>CJ</p>
-      <p>AJ</p>
-      <p>CJ</p>
-      <p>L</p>
-      <p> </p>
-    </article>
-    <article class="tuesday">
-      <p class="tag">Tuesday</p>
-      <p>M</p>
-      <p>M</p>
-      <p>AJ</p>
-      <p>CJ</p>
-      <p> </p>
-      <p>L</p>
-      <p>AJ</p>
-      <p>CJ</p>
-    </article>
-    <article class="wensday">
-      <p class="tag">Wensday</p>
-      <p>M</p>
-      <p>M</p>
-      <p>AJ</p>
-      <p> </p>
-      <p>CJ</p>
-      <p>AJ</p>
-      <p>CJ</p>
-      <p>L</p>
-    </article>
-    <article class="lessons">
-      <h3>Monday</h3>
-      <p>M</p>
-      <p>M</p>
-      <p>AJ</p>
-      <p>CJ</p>
-      <p>L</p>
-      <p> </p>
-    </article>
-    <article class="lessons">
-      <h3>Tuesday</h3>
-      <p>M</p>
-      <p>M</p>
-      <p>AJ</p>
-      <p>CJ</p>
-      <p>L</p>
-      <p> </p>
-    </article>
-    <article class="lessons">
-      <h3>Wenday</h3>
-      <p>M</p>
-      <p>M</p>
-      <p>AJ</p>
-      <p>CJ</p>
-      <p>L</p>
-      <p> </p>
-    </article> -->
   </section>
   <section class="activities">
     <article class="exams">
@@ -155,6 +118,20 @@
     </article>
   </section>
 </main>
+<!-- <script type="text/javascript">
+  const app = {
+    data() {
+      return {
+        <?php
+        // foreach ($myclasses as $myclass) {
+        //   echo `{time: `.$myclass['time'].`, name: `.$myclass['name'].`},`;
+        // }
+        ?>
+      }
+    }
+  }
+  Vue.createApp(app).mount('#schedule-time')
+</script> -->
 
 <?php include_once 'clear/footer.php';?>
 </body>
