@@ -1,7 +1,7 @@
 <?php
 
 $servername = "localhost";
-$username = "beam-node";
+$username = "root";
 $password = "ZLZk!u9@wb5eszm";
 $database = 'beam-ms';
 
