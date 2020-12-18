@@ -6,7 +6,9 @@
   // $logolink = "BEAM MS";
   $logolink = mb_strtoupper("Leviathan dev.");
   $linkLocation = "/";
-  session_start();
+  if(!isset($_SESSION)){
+    session_start();
+  }
   $navteacher = [
     ['name' => 'My School', 'link' => 'school'],
     ['name' => 'Homeworks', 'link' => 'homeworks'],

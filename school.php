@@ -37,7 +37,7 @@
         'id_class' => $myclass['id'],
         'name' => $myclass['name'],
         'day' => mb_strtolower($answer[0]),
-        'time' => (int)$answer[1]
+        'time' => (int)$answer[1],
       ];
     }
   }
@@ -83,18 +83,14 @@
 
               //pro kazdou hodinu v tydnu
               for ($i=1; $i < $max_lessons+1; $i++) {
-                // jestli je
-                $breaker = true;
+                $there_is_nothing = true;
                 foreach ($timer as $timer_one) {
-                  if($schedule_day['color'] == $timer_one['day']){
-                    if($timer_one['time'] == $i){
-                      echo "day is same";
-                      echo "<td>".$timer_one['time']."</td>";
-                      $breaker = false;
-                    }
+                  if($schedule_day['color'] == $timer_one['day'] && $timer_one['time'] == $i){
+                    echo "<td>".$timer_one['name']."</td>";
+                    $there_is_nothing = false;
                   }
                 }
-                if(!$breaker){
+                if($there_is_nothing){
                   echo "<td></td>";
                 }
               }
