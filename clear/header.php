@@ -9,21 +9,26 @@
   if(!isset($_SESSION)){
     session_start();
   }
-  $navteacher = [
-    ['name' => 'My School', 'link' => 'school'],
-    ['name' => 'Homeworks', 'link' => 'homeworks'],
-    ['name' => 'Exams', 'link' => 'exams'],
-    ['name' => 'E-learning', 'link' => 'elerning'],
-  ];
-  $navstudent = [
-    ['name' => 'My School', 'link' => 'school'],
-    ['name' => 'My Marks', 'link' => 'homeworks'],
-    ['name' => 'E-learning', 'link' => 'elerning'],
-  ];
-  $someAnonymous = [
-    ['name' => 'Login', 'link' => 'login'],
-    ['name' => 'Register', 'link' => 'register'],
-  ]
+  // generate navbar
+  if ($_SESSION['role'] >= 2){
+    $navlinks = [
+      ['name' => 'My School', 'link' => 'school'],
+      ['name' => 'Homeworks', 'link' => 'homeworks'],
+      ['name' => 'Exams', 'link' => 'exams'],
+      ['name' => 'E-learning', 'link' => 'elerning'],
+    ];
+  }elseif($_SESSION['role'] == 1){
+    $navlinks = [
+      ['name' => 'My School', 'link' => 'school'],
+      ['name' => 'My Marks', 'link' => 'homeworks'],
+      ['name' => 'E-learning', 'link' => 'elerning'],
+    ];
+  }else{
+    $navlinks = [
+      ['name' => 'Login', 'link' => 'login'],
+      ['name' => 'Register', 'link' => 'register'],
+    ];
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,18 +46,11 @@
         <a href="<?php echo $linkLocation ?>"><h1><?php echo $logolink ?></h1></a>
         <nav>
           <?php
-          if ($_SESSION['role'] >= 2){
-            $navlinks = $navteacher;
-          }elseif($_SESSION['role'] == 1){
-            $navlinks = $navstudent;
-          }else{
-            $navlinks = $someAnonymous;
-          }
           foreach ($navlinks as $nava){
             if($script_name == $nava['link']){
-              echo '<a class="onpage" href="'.$nava['link'].'.php">'.$nava['name'].'</a>';
+              echo '<a class="onpage" href="/'.$nava['link'].'.php">'.$nava['name'].'</a>';
             }else{
-              echo '<a class="" href="'.$nava['link'].'.php">'.$nava['name'].'</a>';
+              echo '<a class="" href="/'.$nava['link'].'.php">'.$nava['name'].'</a>';
             }
           }
           if(isset($_SESSION['role']) != ""){
