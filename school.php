@@ -9,10 +9,10 @@
   include_once 'include/db-connect.php';
   if($_SESSION['role'] == 1){
     // is student setup schedule
-    $myclasses_by_user = $conn->query("SELECT `id_class` FROM `class_student` WHERE `id_user`=".$_SESSION['id'])->fetchAll();
+    $myclasses_by_user = $conn->query("SELECT * FROM `class_student` WHERE `id_user`=".$_SESSION['id'])->fetchAll();
     $myclasses = [];
     foreach($myclasses_by_user as $myclass_by_user){
-      $myclasses[] = $conn->query("SELECT * FROM `classes` WHERE `id_class`=".$myclass_by_user['id_class'])->fetch(FETCH_ASSOC);
+      $myclasses[] = $conn->query("SELECT * FROM `classes` WHERE `id`=".$myclass_by_user['id_class'])->fetch(PDO::FETCH_ASSOC);
     }
     $myclasses_by_user = null;
   }elseif ($_SESSION['role'] >= 2) {
@@ -86,7 +86,8 @@
                 $there_is_nothing = true;
                 foreach ($timer as $timer_one) {
                   if($schedule_day['color'] == $timer_one['day'] && $timer_one['time'] == $i){
-                    echo "<td>".$timer_one['name']."</td>";
+                    $timer_one['name'] = explode('-', $timer_one['name']);
+                    echo "<td>".$timer_one['name'][0]."</td>";
                     $there_is_nothing = false;
                   }
                 }
