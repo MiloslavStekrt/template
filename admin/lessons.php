@@ -27,6 +27,7 @@
            <?php if (isset($lesson['id'])): ?>
              <input type="text" name="name" value="<?php echo $lesson['name']; ?>" placeholder="Subject name">
              <input type="text" name="time" value="<?php echo $lesson['time']; ?>" placeholder="What time? PO-1,2 . UT-2,3 . ST-8">
+             <!-- want to can effective select days when i have lesson propably from list of days and max time -->
              <input type="text" name="id" value="<?php echo $lesson['id']; ?>" hidden>
              <span class="origin">
                <select name="teachername">
