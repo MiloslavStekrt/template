@@ -20,7 +20,7 @@
   }elseif($_SESSION['role'] == 1){
     $navlinks = [
       ['name' => 'My School', 'link' => 'school'],
-      ['name' => 'My Marks', 'link' => 'homeworks'],
+      ['name' => 'My Marks', 'link' => 'mark'],
       ['name' => 'E-learning', 'link' => 'elerning'],
     ];
   }else{
@@ -59,7 +59,7 @@
             }else{
               echo '<a href="">R</a>';
             }
-            echo '<a href="include/logout.php">Left</a>';
+            echo '<a href="/include/logout.php">Left</a>';
           }
          ?>
       </nav>
