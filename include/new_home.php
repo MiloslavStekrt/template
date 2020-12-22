@@ -15,8 +15,8 @@ $data = [
   $_POST['id'],
 ];
 foreach ($data as $dat) {
-  if(!empty($dat) || isset($dat) || $dat != ""){
-    header("location: /homeworks.php");
+  if(empty($dat) || !isset($dat) || $dat != ""){
+    header("location: /homeworks.php?id=".$data[4]);
     die();
   }
 }
