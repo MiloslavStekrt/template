@@ -20,16 +20,17 @@
     if($_GET['home'] != ""){
       $homework_id = $_GET['home'];
       $homeworks_marks = $conn->query("SELECT `id_user`, `mark` FROM `homeworks_user` WHERE `id_home`=".$homework_id)->fetchAll();
-      $students_info = array();
+      $students_info = [];
       foreach ($students_in as $student_in) {
         $user = $conn->query("SELECT `id`,`name` FROM `users` WHERE `id`=".$student_in['id_user'])->fetch(PDO::FETCH_ASSOC);
-        array_push($students_info, array('id' => $user['id'], 'name' => $user['name']));
+        $students_info[] = ['id' => $user['id'], 'name' => $user['name']];
       }
       $home = $conn->query("SELECT * FROM `homeworks` WHERE `id`=".$homework_id)->fetch(PDO::FETCH_ASSOC);
     }
   }elseif($classes){
     $homework_id = $_GET['home'];
     if($homework_id != ""){
+      $homework_id = str_replace("home=", "", $homework_id);
       header("location: homeworks.php?id=".$classes[0]['id']."&home=".$homework_id);
       die();
     }
@@ -51,7 +52,7 @@
 
       echo '<p><a href="homeworks.php?'.$_SERVER['QUERY_STRING'].'&home='.$homework['id'].'">'.$date.' - '.$homework['name'].'</a> </p>';
     } ?>
-    <p><a href="new_homework.php">new Homework</a></p>
+    <p><a href="new_homework.php?id=<?php echo $class_id ?>">new Homework</a></p>
   </section>
   <section class="control">
     <form action="/include/home_students.php" method="post" id="app">
@@ -73,35 +74,21 @@
         </span>
         <input type="text" name="id_home" value="<?php echo $home['id'] ?>" hidden>
         <?php if ($homework_id): ?>
-          <span id="app">
-
-          </span>
-
-          <script type="text/javascript">
-            const App = (
-              data() {
-                return {
-                  student: [
-                    <?php foreach($students_info as $student_info){
-                      echo '{'.$student_info['id'].','.$student_info['name'].'}';
-                    } ?>
-                  ]
-                }
-              }
-            )
-            const app = Vue.createApp(App)
-
-            app.component('user',{
-              template: ``
-            })
-
-            app.mount("#app")
-          </script>
-
-
+          <?php foreach ($students_info as $student_info): ?>
+            <span>
+              <h3><?php echo $student_info['name'] ?></h3>
+              <select name="">
+                <option value="<?php echo $student_info['id'] ?>_0">N</option>
+                <option value="<?php echo $student_info['id'] ?>_1">1</option>
+                <option value="<?php echo $student_info['id'] ?>_2">2</option>
+                <option value="<?php echo $student_info['id'] ?>_3">3</option>
+                <option value="<?php echo $student_info['id'] ?>_4">4</option>
+                <option value="<?php echo $student_info['id'] ?>_5">5</option>
+              </select>
+            </span>
+          <?php endforeach; ?>
         <?php endif; ?>
       </form>
     </article>
   </section>
-  <script src="js/homework.js" charset="utf-8"></script>
 </main>

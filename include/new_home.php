@@ -1,11 +1,4 @@
 <?php
-
-// <input type="text" name="title" placeholder="Name your homework">
-// <input type="text" name="question" placeholder="Question">
-// <input type="text" name="corect" placeholder="Correct Answer">
-// <input type="date" name="date">
-// <input type="time" name="time">
-
 if(!isset($_POST['button'])){
   header("location: /");
   die();
@@ -18,11 +11,17 @@ $data = [
   $_POST['title'],
   $_POST['question'],
   $_POST['corect'],
-  $datetime
+  $datetime,
+  $_POST['id'],
 ];
-
+foreach ($data as $dat) {
+  if(!empty($dat) || isset($dat) || $dat != ""){
+    header("location: /homeworks.php");
+    die();
+  }
+}
 include_once 'db-connect.php';
-$conn->prepare("INSERT INTO `homeworks`(`time`, `name`, `question`, `correct_answer`) VALUES (?, ?, ?, ?)")->execute([$data[3], $data[0], $data[1], $data[2]]);
+$conn->prepare("INSERT INTO `homeworks`(`time`, `name`, `question`, `correct_answer`, `id_class`) VALUES (?, ?, ?, ?, ?)")->execute([$data[3], $data[0], $data[1], $data[2], $date[4]]);
 $conn = null;
 
 header("location: /homeworks.php");
